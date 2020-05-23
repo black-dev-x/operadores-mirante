@@ -1,20 +1,15 @@
 package com.devx.gerenciamento.operador;
 
-import javax.ejb.EJB;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ejb.Stateless;
 
-@Path("")
-public class OperadorService {
+@Stateless
+public class OperadorManager {
 
-	@EJB
-	OperadorManager operadorManager;
+	static {
+		System.out.println("********************");
+	}
 
-	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String helloWorld() {
-		return operadorManager.getHelloWorld();
+	public String getHelloWorld() {
+		return "Hello World";
 	}
 }
