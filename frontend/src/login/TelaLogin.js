@@ -9,7 +9,7 @@ const TelaLogin = props => (
       <p>Sistema de Gerenciamento</p>
       <input placeholder="usuário" value={props.username} name="username" onChange={props.alterarCampoLogin}></input>
       <input placeholder="senha" type="password" value={props.password} name="password" onChange={props.alterarCampoLogin}></input>
-      <button className="sign-in" onClick={props.logarNoSistema}>
+      <button className="sign-in" onClick={() => props.logarNoSistema(props.username, props.password)}>
         Logar
       </button>
     </div>

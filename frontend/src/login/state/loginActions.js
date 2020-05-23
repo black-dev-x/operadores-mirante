@@ -1,11 +1,9 @@
 import axios from 'axios'
 
-export const logarNoSistema = () => {
+export const logarNoSistema = (username, password) => {
   return dispatch => {
-    console.log('erro')
-    const usuario = {}
     axios
-      .post('localhost:8080/login', usuario)
+      .post('login', { username, password })
       .then(response => dispatch(logarNoSistemaSucesso(response.data)))
       .catch(erro => dispatch(logarNoSistemaErro(erro)))
   }
