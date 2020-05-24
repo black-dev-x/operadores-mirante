@@ -1,24 +1,25 @@
 package com.devx.gerenciamento.security;
 
-public class Credentials {
+import java.util.Set;
 
-	private String username;
-	private String password;
+import javax.security.enterprise.credential.Credential;
 
-	public String getUsername() {
-		return username;
+public class Credencial implements Credential {
+
+	private final String principal;
+	private final Set<String> authorities; 
+	
+	public Credencial(String principal, Set<String> authorities) {
+		this.principal = principal;
+		this.authorities = authorities;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public Set<String> getAuthorities() {
+		return authorities;
 	}
-
-	public String getPassword() {
-		return password;
+	
+	public String getPrincipal() {
+		return principal;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 }

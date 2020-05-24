@@ -3,7 +3,8 @@ import { LOGAR_NO_SISTEMA_SUCESSO, ALTERAR_CAMPO_LOGIN, LOGAR_NO_SISTEMA_ERRO } 
 const initialState = {
   username: '',
   password: '',
-  errorMessage: ''
+  errorMessage: '',
+  usuarioLogado: ''
 }
 
 export default (state = initialState, action) => {

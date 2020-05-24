@@ -5,16 +5,19 @@ export const logarNoSistema = (username, password) => {
   return dispatch => {
     axios
       .post('login', { username, password })
-      .then(response => dispatch([logarNoSistemaSucesso(response.data), push('/operador')]))
+      .then(response => dispatch([logarNoSistemaSucesso(response.data, username), push('/operador')]))
       .catch(erro => dispatch(logarNoSistemaErro(erro)))
   }
 }
 
 export const LOGAR_NO_SISTEMA_SUCESSO = 'LOGAR NO SISTEMA SUCESSO'
-export const logarNoSistemaSucesso = info => ({
-  type: LOGAR_NO_SISTEMA_SUCESSO,
-  payload: info
-})
+export const logarNoSistemaSucesso = (token, username) => {
+  localStorage.setItem('token', token)
+  return {
+    type: LOGAR_NO_SISTEMA_SUCESSO,
+    payload: username
+  }
+}
 
 export const LOGAR_NO_SISTEMA_ERRO = 'LOGAR NO SISTEMA ERRO'
 export const logarNoSistemaErro = erro => ({
