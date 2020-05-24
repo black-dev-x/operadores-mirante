@@ -13,8 +13,10 @@ public class LoginService {
 	private EntityManager entityManager;
 
 	public void logar(Credentials credentials) {
-		entityManager.createQuery("SELECT o FROM Operador o where o.login = :login", Operador.class)
+		Operador operador = entityManager.createQuery("SELECT o FROM Operador o where o.login = :login", Operador.class)
 				.setParameter("login", credentials.getUsername()).getSingleResult();
+		boolean senhaEstaCorreta = operador.getSenha().equals(credentials.getPassword());
+		if(!senhaEstaCorreta) throw new RuntimeException("Problemas para logar xD, senha errada");
 
 	}
 }

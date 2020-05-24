@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { push } from 'connected-react-router'
 
 export const logarNoSistema = (username, password) => {
   return dispatch => {
     axios
       .post('login', { username, password })
-      .then(response => dispatch(logarNoSistemaSucesso(response.data)))
+      .then(response => dispatch([logarNoSistemaSucesso(response.data), push('/operador')]))
       .catch(erro => dispatch(logarNoSistemaErro(erro)))
   }
 }
