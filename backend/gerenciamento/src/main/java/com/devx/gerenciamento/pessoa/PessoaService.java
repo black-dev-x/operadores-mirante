@@ -28,4 +28,20 @@ public class PessoaService {
 		return telefones;
 	}
 
+	public Pessoa deletarPessoa(int idPessoa) {
+		Pessoa pessoa = entityManager.find(Pessoa.class, idPessoa);
+		entityManager.remove(pessoa);
+		return pessoa;
+	}
+
+	public Pessoa editarPessoa(Pessoa pessoa) {
+		Pessoa pessoaSalva = entityManager.find(Pessoa.class, pessoa.getId());
+		pessoaSalva.setDataDeNascimento(pessoa.getDataDeNascimento());
+		pessoaSalva.setNome(pessoa.getNome());
+		pessoaSalva.setNomeDaMae(pessoa.getNomeDaMae());
+		pessoaSalva.setNomeDoPai(pessoa.getNomeDoPai());
+		entityManager.persist(pessoaSalva);
+		return pessoaSalva;
+	}
+
 }

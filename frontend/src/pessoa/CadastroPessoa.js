@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { cadastrarPessoa, alterarCampoPessoa } from './state/pessoaActions'
+import { cadastrarPessoa, alterarCampoPessoa, editarPessoa } from './state/pessoaActions'
+import { FaUserEdit, FaUserPlus } from 'react-icons/fa'
 
 const CadastroPessoa = props => {
   return (
@@ -32,7 +33,21 @@ const CadastroPessoa = props => {
         <p>Nome da Mãe</p>
         <input type="text" name="nomeDaMae" value={props.pessoa.nomeDaMae} onChange={props.alterarCampoPessoa} />
       </label>
-      <button onClick={() => props.cadastrarPessoa(props.pessoa)}>Cadastrar Pessoa</button>
+      {props.pessoa.id ? (
+        <button onClick={() => props.editarPessoa(props.pessoa)}>
+          <span>
+            Editar
+            <FaUserEdit></FaUserEdit>
+          </span>
+        </button>
+      ) : (
+        <button onClick={() => props.cadastrarPessoa(props.pessoa)}>
+          <span>
+            Cadastrar
+            <FaUserPlus></FaUserPlus>
+          </span>
+        </button>
+      )}
     </div>
   )
 }
@@ -42,6 +57,7 @@ const mapStateToProps = state => ({
   pessoa: state.pessoa.pessoa
 })
 const mapDispatchToProps = {
+  editarPessoa,
   alterarCampoPessoa,
   cadastrarPessoa
 }

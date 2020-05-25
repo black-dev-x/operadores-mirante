@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { listarPessoas } from './state/pessoaActions'
+import { listarPessoas, inicioEditarPessoa, deletarPessoa } from './state/pessoaActions'
 import { FaEdit, FaPhone, FaTrash } from 'react-icons/fa'
 
 const ListaPessoa = props => {
@@ -33,9 +33,9 @@ const ListaPessoa = props => {
               <td>{pessoa.loginDoOperador}</td>
               <td>
                 <div className="actions">
-                  <FaEdit></FaEdit>
+                  <FaEdit onClick={() => props.inicioEditarPessoa(pessoa)}></FaEdit>
                   <FaPhone></FaPhone>
-                  <FaTrash></FaTrash>
+                  <FaTrash onClick={() => props.deletarPessoa(pessoa)}></FaTrash>
                 </div>
               </td>
             </tr>
@@ -45,11 +45,12 @@ const ListaPessoa = props => {
     </div>
   )
 }
-
 const mapStateToProps = state => ({
   pessoas: state.pessoa.pessoas
 })
 const mapDispatchToProps = {
+  deletarPessoa,
+  inicioEditarPessoa,
   listarPessoas
 }
 
