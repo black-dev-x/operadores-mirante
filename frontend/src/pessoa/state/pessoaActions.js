@@ -1,4 +1,5 @@
 import api from '../../configurations/api'
+import { push } from 'connected-react-router'
 
 export const ALTERAR_CAMPO_PESSOA = 'ALTERAR CAMPO PESSOA'
 export const alterarCampoPessoa = event => ({
@@ -12,6 +13,11 @@ export const listarPessoas = _ => {
   }
 }
 
+export const detalhesPessoa = pessoa => {
+  return dispatch => {
+    dispatch(push(`pessoa/${pessoa.id}`))
+  }
+}
 export const LISTAR_PESSOAS_SUCESSO = 'LISTAR PESSOAS SUCESSO'
 export const listarPessoasSucesso = pessoas => ({
   type: LISTAR_PESSOAS_SUCESSO,
@@ -62,5 +68,17 @@ export const deletarPessoa = pessoa => {
 export const DELETAR_PESSOA_SUCESSO = 'DELETAR PESSOA SUCESSO'
 export const deletarPessoaSucesso = pessoa => ({
   type: DELETAR_PESSOA_SUCESSO,
+  payload: pessoa
+})
+
+export const informacoesPessoa = id => {
+  return dispatch => {
+    api.get(`/pessoa/${id}`).then(response => dispatch(informacoesPessoaSucesso(response.data)))
+  }
+}
+
+export const INFORMACOES_PESSOA_SUCESSO = 'INFORMACOES PESSOA SUCESSO'
+export const informacoesPessoaSucesso = pessoa => ({
+  type: INFORMACOES_PESSOA_SUCESSO,
   payload: pessoa
 })

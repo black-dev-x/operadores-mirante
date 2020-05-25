@@ -46,8 +46,8 @@ public class PessoaController {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Telefone> telefonesDaPessoa(@PathParam("id") int idPessoa) {
-		return pessoaService.listarTelefonesPeloIdDaPessoa(idPessoa);
+	public Pessoa informacoesPessoa(@PathParam("id") int idPessoa) {
+		return pessoaService.informacoesPessoa(idPessoa);
 	}
 	
 	@DELETE

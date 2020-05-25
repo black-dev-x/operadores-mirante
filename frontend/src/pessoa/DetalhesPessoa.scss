@@ -1,0 +1,21 @@
+.informacoes-pessoa {
+  font-size: 1.4em;
+  width: 800px;
+  margin: 50px auto;
+  background-color: white;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  span {
+    font-weight: 800;
+  }
+  li,
+  p {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+}
+.background-informacoes-pessoais {
+  background-color: #ddd;
+  min-height: 100vh;
+  padding-top: 20px;
+}
