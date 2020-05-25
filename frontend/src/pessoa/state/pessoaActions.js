@@ -112,7 +112,9 @@ export const deletarTelefoneSucesso = telefone => ({
 export const adicionarTelefone = (telefone, pessoa) => {
   return dispatch => {
     telefone.pessoa = pessoa
-    api.post('/pessoa/telefones', telefone).then(response => dispatch(adicionarTelefoneSucesso(response.data)))
+    api
+      .post('/pessoa/telefones', telefone)
+      .then(response => dispatch([adicionarTelefoneSucesso(response.data), limparCamposInformacoesPessoa()]))
   }
 }
 
@@ -126,4 +128,9 @@ export const ATUALIZAR_CAMPOS_TELEFONE = 'ATUALIZAR_CAMPOS_TELEFONE'
 export const atualizarCamposTelefone = event => ({
   type: ATUALIZAR_CAMPOS_TELEFONE,
   payload: event.target
+})
+
+export const LIMPAR_CAMPOS_INFORMACOES_PESSOA = 'LIMPAR CAMPOS INFORMACOES PESSOA'
+export const limparCamposInformacoesPessoa = _ => ({
+  type: LIMPAR_CAMPOS_INFORMACOES_PESSOA
 })

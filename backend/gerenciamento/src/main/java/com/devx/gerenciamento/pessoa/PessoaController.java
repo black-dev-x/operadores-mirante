@@ -66,6 +66,7 @@ public class PessoaController {
 	@Path("telefones")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured(Perfil.GERENTE)
 	public Telefone salvarTelefone(Telefone telefone) {
 		String loginOperador = securityContext.getUserPrincipal().getName();
 		telefone.setLoginDoOperador(loginOperador);

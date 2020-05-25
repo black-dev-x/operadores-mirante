@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { informacoesPessoa, deletarTelefone, adicionarTelefone, atualizarCamposTelefone } from './state/pessoaActions'
 import './DetalhesPessoa.scss'
 import { FaPlusCircle, FaTrash } from 'react-icons/fa'
+import { getUser } from '../configurations/auth'
 const DetalhesPessoa = props => {
   const idPessoa = props.match.params.id
   const informacoesPessoa = props.informacoesPessoa
-
+  const usuarioLogado = getUser()
+  const gerenteOuAdmin = usuarioLogado.perfil === 'ADMIN' || usuarioLogado.perfil === 'GERENTE'
   useEffect(() => {
     informacoesPessoa(idPessoa)
   }, [informacoesPessoa, idPessoa])
@@ -49,30 +51,35 @@ const DetalhesPessoa = props => {
             {props.pessoa.tipoPessoa}
           </li>
           <li>
-            <div className="input-telefone">
-              <input placeholder="DDD" className="ddd" value={props.telefone.ddd} name="ddd" onChange={props.atualizarCamposTelefone} />
-              <input placeholder="Numero" value={props.telefone.numero} name="numero" onChange={props.atualizarCamposTelefone} />
-              <select value={props.telefone.tipoTelefone} name="tipoTelefone" onChange={props.atualizarCamposTelefone}>
-                <option value="CELULAR">Celular</option>
-                <option value="FIXO">Fixo</option>
-                <option value="COMERCIAL">Comercial</option>
-              </select>
-              <FaPlusCircle
-                onClick={() => {
-                  props.adicionarTelefone(props.telefone, props.pessoa)
-                }}
-              ></FaPlusCircle>
-            </div>
+            {gerenteOuAdmin && (
+              <div className="input-telefone">
+                <input placeholder="DDD" className="ddd" value={props.telefone.ddd} name="ddd" onChange={props.atualizarCamposTelefone} />
+                <input placeholder="Numero" value={props.telefone.numero} name="numero" onChange={props.atualizarCamposTelefone} />
+                <select value={props.telefone.tipoTelefone} name="tipoTelefone" onChange={props.atualizarCamposTelefone}>
+                  <option value="CELULAR">Celular</option>
+                  <option value="FIXO">Fixo</option>
+                  <option value="COMERCIAL">Comercial</option>
+                </select>
+                <FaPlusCircle
+                  onClick={() => {
+                    props.adicionarTelefone(props.telefone, props.pessoa)
+                  }}
+                ></FaPlusCircle>
+              </div>
+            )}
+
             <span>Telefones</span>
             <ul>
               {props.telefones.map(telefone => (
                 <li className="telefone-card" key={telefone.id}>
                   <span>
-                    ({telefone.ddd}) {telefone.numero}
+                    ({telefone.ddd}) {telefone.numero} - {telefone.tipoTelefone}
                   </span>
-                  <span>
-                    <FaTrash onClick={() => props.deletarTelefone(telefone)}></FaTrash>
-                  </span>
+                  {gerenteOuAdmin && (
+                    <span>
+                      <FaTrash onClick={() => props.deletarTelefone(telefone)}></FaTrash>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
