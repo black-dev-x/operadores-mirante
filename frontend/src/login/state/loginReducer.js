@@ -10,7 +10,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGAR_NO_SISTEMA_SUCESSO:
-      return initialState
+      return { ...initialState, usuarioLogado: action.payload }
     case LOGAR_NO_SISTEMA_ERRO:
       return { ...state, errorMessage: action.payload.message }
     case ALTERAR_CAMPO_LOGIN:
