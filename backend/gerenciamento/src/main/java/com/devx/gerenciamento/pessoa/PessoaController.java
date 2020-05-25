@@ -50,6 +50,20 @@ public class PessoaController {
 		return pessoaService.informacoesPessoa(idPessoa);
 	}
 	
+	@GET
+	@Path("telefones/{id}")
+	public List<Telefone> informacoesTelefone(@PathParam("id") int idPessoa){
+		return pessoaService.informacoesTelefone(idPessoa);
+	}
+	
+	@POST
+	@Path("telefones")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Telefone salvarTelefone(Telefone telefone) {
+		return pessoaService.salvarTelefone(telefone);
+	}
+	
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)

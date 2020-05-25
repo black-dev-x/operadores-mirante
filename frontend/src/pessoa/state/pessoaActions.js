@@ -74,6 +74,7 @@ export const deletarPessoaSucesso = pessoa => ({
 export const informacoesPessoa = id => {
   return dispatch => {
     api.get(`/pessoa/${id}`).then(response => dispatch(informacoesPessoaSucesso(response.data)))
+    api.get(`/pessoa/telefones/${id}`).then(response => dispatch(informacoesTelefoneSucesso(response.data)))
   }
 }
 
@@ -81,4 +82,10 @@ export const INFORMACOES_PESSOA_SUCESSO = 'INFORMACOES PESSOA SUCESSO'
 export const informacoesPessoaSucesso = pessoa => ({
   type: INFORMACOES_PESSOA_SUCESSO,
   payload: pessoa
+})
+
+export const INFORMACOES_TELEFONE_SUCESSO = 'INFORMACOES TELEFONE SUCESSO'
+export const informacoesTelefoneSucesso = telefones => ({
+  type: INFORMACOES_TELEFONE_SUCESSO,
+  payload: telefones
 })

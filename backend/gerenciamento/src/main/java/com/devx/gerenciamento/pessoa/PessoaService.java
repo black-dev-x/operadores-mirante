@@ -42,4 +42,14 @@ public class PessoaService {
 		return pessoaSalva;
 	}
 
+	public List<Telefone> informacoesTelefone(int idPessoa) {
+		return entityManager.createQuery("Select t FROM Telefone t JOIN t.pessoa p WHERE p.id = :id", Telefone.class)
+				.setParameter("id", idPessoa).getResultList();
+	}
+
+	public Telefone salvarTelefone(Telefone telefone) {
+		entityManager.persist(telefone);
+		return telefone;
+	}
+
 }

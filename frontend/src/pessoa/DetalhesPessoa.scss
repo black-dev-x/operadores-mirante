@@ -13,6 +13,19 @@
     margin-top: 20px;
     margin-left: 20px;
   }
+  .telefone-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: 0.5s color;
+    &:hover {
+      color: red;
+    }
+    svg {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
 }
 .background-informacoes-pessoais {
   background-color: #ddd;

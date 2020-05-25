@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { informacoesPessoa } from './state/pessoaActions'
 import './DetalhesPessoa.scss'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 const DetalhesPessoa = props => {
   const idPessoa = props.match.params.id
   const informacoesPessoa = props.informacoesPessoa
@@ -50,8 +51,16 @@ const DetalhesPessoa = props => {
           <li>
             <span>Telefones</span>
             <ul>
-              <li>921391203</li>
-              <li>29301832138</li>
+              {props.telefones.map(telefone => (
+                <li className="telefone-card" key={telefone.id}>
+                  <span>
+                    ({telefone.ddd}) {telefone.numero}
+                  </span>
+                  <span>
+                    <FaTrash></FaTrash>
+                  </span>
+                </li>
+              ))}
             </ul>
           </li>
         </ul>
@@ -61,7 +70,8 @@ const DetalhesPessoa = props => {
 }
 
 const mapStateToProps = state => ({
-  pessoa: state.pessoaInformacoes.pessoa
+  pessoa: state.pessoaInformacoes.pessoa,
+  telefones: state.pessoaInformacoes.telefones
 })
 const mapDispatchToProps = {
   informacoesPessoa
