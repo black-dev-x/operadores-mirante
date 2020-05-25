@@ -1,9 +1,9 @@
-import axios from 'axios'
 import { push } from 'connected-react-router'
+import api from '../../configurations/api'
 
 export const logarNoSistema = (username, password) => {
   return dispatch => {
-    axios
+    api
       .post('login', { username, password })
       .then(response => dispatch([logarNoSistemaSucesso(response.data), push('/home')]))
       .catch(erro => dispatch(logarNoSistemaErro(erro)))
@@ -12,7 +12,8 @@ export const logarNoSistema = (username, password) => {
 
 export const LOGAR_NO_SISTEMA_SUCESSO = 'LOGAR NO SISTEMA SUCESSO'
 export const logarNoSistemaSucesso = usuarioLogado => {
-  localStorage.setItem('token', usuarioLogado.jwt)
+  localStorage.setItem('user', JSON.stringify(usuarioLogado))
+  api.defaults.headers.common['Authorization'] = usuarioLogado.jwt
   return {
     type: LOGAR_NO_SISTEMA_SUCESSO,
     payload: usuarioLogado

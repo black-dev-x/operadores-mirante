@@ -1,8 +1,8 @@
-import axios from 'axios'
+import api from '../../configurations/api'
 
 export const carregarListaOperadores = () => {
   return dispatch => {
-    axios.get('operador').then(response => dispatch(carregarListaOperadoresSucesso(response.data)))
+    api.get('operador').then(response => dispatch(carregarListaOperadoresSucesso(response.data)))
   }
 }
 
@@ -31,7 +31,7 @@ export const alterarCampoOperador = event => ({
 
 export const deletarOperador = operador => {
   return dispatch => {
-    axios.delete(`operador/${operador.id}`).then(_ => dispatch(deletarOperadorSucesso(operador)))
+    api.delete(`operador/${operador.id}`).then(_ => dispatch(deletarOperadorSucesso(operador)))
   }
 }
 
@@ -43,13 +43,13 @@ export const deletarOperadorSucesso = operador => ({
 
 export const cadastrarOperador = operador => {
   return dispatch => {
-    axios.post('operador', operador).then(response => dispatch([cadastrarOperadorSucesso(response.data), limparCamposOperadores()]))
+    api.post('operador', operador).then(response => dispatch([cadastrarOperadorSucesso(response.data), limparCamposOperadores()]))
   }
 }
 
 export const editarOperador = operador => {
   return dispatch => {
-    axios.put('operador', operador).then(response => dispatch([editarOperadorSucesso(response.data), limparCamposOperadores()]))
+    api.put('operador', operador).then(response => dispatch([editarOperadorSucesso(response.data), limparCamposOperadores()]))
   }
 }
 

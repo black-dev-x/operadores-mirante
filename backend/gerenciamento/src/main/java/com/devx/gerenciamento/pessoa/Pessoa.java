@@ -26,6 +26,8 @@ public class Pessoa {
 
 	private String nomeDaMae;
 
+	private String nomeDoPai;
+
 	@CreationTimestamp
 	private Date dataDeCadastro;
 
@@ -64,9 +66,17 @@ public class Pessoa {
 	public void setDataDeNascimento(Date dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
-	
+
 	public String getNomeDaMae() {
 		return nomeDaMae;
+	}
+
+	public String getNomeDoPai() {
+		return nomeDoPai;
+	}
+
+	public void setNomeDoPai(String nomeDoPai) {
+		this.nomeDoPai = nomeDoPai;
 	}
 
 	public void setNomeDaMae(String nomeDaMae) {
