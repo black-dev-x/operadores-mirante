@@ -5,6 +5,7 @@ import './DetalhesPessoa.scss'
 import { FaPlusCircle, FaTrash } from 'react-icons/fa'
 import { getUser } from '../configurations/auth'
 import { dataFormatada } from '../shared/dateFormat'
+import { cpfMask, cnpjMask } from '../shared/masks'
 const DetalhesPessoa = props => {
   const idPessoa = props.match.params.id
   const informacoesPessoa = props.informacoesPessoa
@@ -29,7 +30,7 @@ const DetalhesPessoa = props => {
           </li>
           <li>
             <span>Documento:</span>
-            {props.pessoa.documento}
+            {props.pessoa.tipoPessoa === 'FISICA' ? cpfMask(props.pessoa.documento) : cnpjMask(props.pessoa.documento)}
           </li>
           <li>
             <span>Data de Nascimento:</span>

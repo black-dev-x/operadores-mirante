@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Pessoa {
 
@@ -28,6 +30,7 @@ public class Pessoa {
 	@NotNull(message = "O Documento deve ser informado")
 	private String documento;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Past(message = "Por favor, volte daqui uns dias quando essa pessoa nascer, para cadastra-la")
 	@NotNull(message = "A Data de nascimento deve ser informada")
 	private Date dataDeNascimento;

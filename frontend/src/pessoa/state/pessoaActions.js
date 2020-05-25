@@ -53,10 +53,14 @@ export const cadastrarPessoaSucesso = pessoa => ({
 })
 
 export const INICIO_EDITAR_PESSOA = 'INICIO EDITAR PESSOA'
-export const inicioEditarPessoa = pessoa => ({
-  type: INICIO_EDITAR_PESSOA,
-  payload: pessoa
-})
+export const inicioEditarPessoa = pessoa => {
+  if (pessoa.nomeDoPai === null) pessoa.nomeDoPai = ''
+  if (pessoa.nomeDaMae === null) pessoa.nomeDaMae = ''
+  return {
+    type: INICIO_EDITAR_PESSOA,
+    payload: pessoa
+  }
+}
 
 export const editarPessoa = pessoa => {
   return dispatch => {

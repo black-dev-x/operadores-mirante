@@ -12,16 +12,17 @@ const telefoneInicial = {
   numero: '',
   tipoTelefone: 'FIXO'
 }
+const pessoaInicial = {
+  id: null,
+  nome: '',
+  tipoPessoa: 'FISICA',
+  documento: '',
+  dataDeNascimento: '',
+  nomeDoPai: '',
+  nomeDaMae: ''
+}
 const initialState = {
-  pessoa: {
-    id: null,
-    nome: '',
-    tipoPessoa: 'FISICA',
-    documento: '',
-    dataDeNascimento: '',
-    nomeDoPai: '',
-    nomeDaMae: ''
-  },
+  pessoa: pessoaInicial,
   telefones: [],
   telefone: telefoneInicial
 }
@@ -29,7 +30,7 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case INFORMACOES_PESSOA_SUCESSO:
-      return { ...state, pessoa: payload }
+      return { ...state, pessoa: { ...payload } }
     case INFORMACOES_TELEFONE_SUCESSO:
       return { ...state, telefones: payload }
     case DELETAR_TELEFONE_SUCESSO:
