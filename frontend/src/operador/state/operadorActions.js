@@ -3,7 +3,7 @@ import { push } from 'connected-react-router'
 
 export const carregarListaOperadores = () => {
   return dispatch => {
-    api.get('operador').then(response => dispatch(carregarListaOperadoresSucesso(response.data)))
+    api.get('/operador').then(response => dispatch(carregarListaOperadoresSucesso(response.data)))
   }
 }
 
@@ -32,7 +32,10 @@ export const alterarCampoOperador = event => ({
 
 export const deletarOperador = operador => {
   return dispatch => {
-    api.delete(`operador/${operador.id}`).then(_ => dispatch(deletarOperadorSucesso(operador)))
+    api
+      .delete(`/operador/${operador.id}`)
+      .then(_ => dispatch(deletarOperadorSucesso(operador)))
+      .catch(_ => alert('Erro ao deletar operador'))
   }
 }
 
@@ -44,13 +47,25 @@ export const deletarOperadorSucesso = operador => ({
 
 export const cadastrarOperador = operador => {
   return dispatch => {
-    api.post('operador', operador).then(response => dispatch([cadastrarOperadorSucesso(response.data), limparCamposOperadores()]))
+    api
+      .post('/operador', operador)
+      .then(response => dispatch([cadastrarOperadorSucesso(response.data), limparCamposOperadores()]))
+      .catch(error => {
+        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
+        alert(mensagens)
+      })
   }
 }
 
 export const editarOperador = operador => {
   return dispatch => {
-    api.put('operador', operador).then(response => dispatch([editarOperadorSucesso(response.data), limparCamposOperadores()]))
+    api
+      .put('/operador', operador)
+      .then(response => dispatch([editarOperadorSucesso(response.data), limparCamposOperadores()]))
+      .catch(error => {
+        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
+        alert(mensagens)
+      })
   }
 }
 
@@ -68,6 +83,6 @@ export const cadastrarOperadorSucesso = operador => ({
 
 export const navegarTelaPessoas = _ => {
   return dispatch => {
-    dispatch(push('pessoa'))
+    dispatch(push('/pessoa'))
   }
 }

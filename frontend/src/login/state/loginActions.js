@@ -6,7 +6,10 @@ export const logarNoSistema = (username, password) => {
     api
       .post('login', { username, password })
       .then(response => dispatch([logarNoSistemaSucesso(response.data), push('/home')]))
-      .catch(erro => dispatch(logarNoSistemaErro(erro)))
+      .catch(erro => {
+        dispatch(logarNoSistemaErro(erro))
+        alert('Erro ao logar no sistema: ' + erro.message)
+      })
   }
 }
 
