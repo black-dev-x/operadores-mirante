@@ -2,6 +2,7 @@ package com.devx.gerenciamento.operador;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Operador {
 	@NotNull(message = "O login deve ser informado")
 	@Size(max=15, message="O nome deve ter no máximo 15 caracteres")
 	@Pattern(regexp = "[a-zA-Z-_]*", message = "O login deve conter somente letras, - ou _")
+	@Column(unique = true)
 	private String login;
 
 	@NotNull(message = "A senha deve ser informada")
