@@ -89,3 +89,34 @@ export const informacoesTelefoneSucesso = telefones => ({
   type: INFORMACOES_TELEFONE_SUCESSO,
   payload: telefones
 })
+
+export const deletarTelefone = telefone => {
+  return dispatch => {
+    api.delete(`/pessoa/telefones/${telefone.id}`).then(_ => dispatch(deletarTelefoneSucesso(telefone)))
+  }
+}
+
+export const DELETAR_TELEFONE_SUCESSO = 'DELETAR_TELEFONE_SUCESSO'
+export const deletarTelefoneSucesso = telefone => ({
+  type: DELETAR_TELEFONE_SUCESSO,
+  payload: telefone
+})
+
+export const adicionarTelefone = (telefone, pessoa) => {
+  return dispatch => {
+    telefone.pessoa = pessoa
+    api.post('/pessoa/telefones', telefone).then(response => dispatch(adicionarTelefoneSucesso(response.data)))
+  }
+}
+
+export const ADICIONAR_TELEFONE_SUCESSO = 'ADICIONAR TELEFONE SUCESSO'
+export const adicionarTelefoneSucesso = telefone => ({
+  type: ADICIONAR_TELEFONE_SUCESSO,
+  payload: telefone
+})
+
+export const ATUALIZAR_CAMPOS_TELEFONE = 'ATUALIZAR_CAMPOS_TELEFONE'
+export const atualizarCamposTelefone = event => ({
+  type: ATUALIZAR_CAMPOS_TELEFONE,
+  payload: event.target
+})

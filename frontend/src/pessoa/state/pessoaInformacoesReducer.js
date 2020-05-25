@@ -1,4 +1,10 @@
-import { INFORMACOES_PESSOA_SUCESSO, INFORMACOES_TELEFONE_SUCESSO } from './pessoaActions'
+import {
+  INFORMACOES_PESSOA_SUCESSO,
+  INFORMACOES_TELEFONE_SUCESSO,
+  DELETAR_TELEFONE_SUCESSO,
+  ADICIONAR_TELEFONE_SUCESSO,
+  ATUALIZAR_CAMPOS_TELEFONE
+} from './pessoaActions'
 
 const initialState = {
   pessoa: {
@@ -10,13 +16,12 @@ const initialState = {
     nomeDoPai: '',
     nomeDaMae: ''
   },
-  telefones: [
-    {
-      id: 1,
-      ddd: 66,
-      numero: '9289312'
-    }
-  ]
+  telefones: [],
+  telefone: {
+    ddd: '32',
+    numero: '32',
+    tipoTelefone: 'FIXO'
+  }
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -25,6 +30,12 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, pessoa: payload }
     case INFORMACOES_TELEFONE_SUCESSO:
       return { ...state, telefones: payload }
+    case DELETAR_TELEFONE_SUCESSO:
+      return { ...state, telefones: state.telefones.filter(telefone => telefone.id !== payload.id) }
+    case ADICIONAR_TELEFONE_SUCESSO:
+      return { ...state, telefones: [...state.telefones, payload] }
+    case ATUALIZAR_CAMPOS_TELEFONE:
+      return { ...state, telefone: { ...state.telefone, [payload.name]: payload.value } }
     default:
       return state
   }

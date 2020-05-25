@@ -32,3 +32,26 @@
   min-height: 100vh;
   padding-top: 20px;
 }
+.input-telefone {
+  display: flex;
+  align-items: center;
+  .ddd {
+    width: 80px;
+  }
+  input,
+  select {
+    font-size: 1.1em;
+  }
+  select {
+    border: 0;
+    outline: 0;
+  }
+  svg {
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: 0.5s color;
+    &:hover {
+      color: red;
+    }
+  }
+}

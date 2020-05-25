@@ -56,11 +56,19 @@ public class PessoaController {
 		return pessoaService.informacoesTelefone(idPessoa);
 	}
 	
+	@DELETE
+	@Path("telefones/{id}")
+	public Telefone deletarTelefone(@PathParam("id") int idTelefone){
+		return pessoaService.deletarTelefone(idTelefone);
+	}
+	
 	@POST
 	@Path("telefones")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Telefone salvarTelefone(Telefone telefone) {
+		String loginOperador = securityContext.getUserPrincipal().getName();
+		telefone.setLoginDoOperador(loginOperador);
 		return pessoaService.salvarTelefone(telefone);
 	}
 	

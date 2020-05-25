@@ -52,4 +52,10 @@ public class PessoaService {
 		return telefone;
 	}
 
+	public Telefone deletarTelefone(int idTelefone) {
+		Telefone telefone = entityManager.find(Telefone.class, idTelefone);
+		entityManager.remove(telefone);
+		return telefone;
+	}
+
 }
