@@ -6,7 +6,8 @@ import {
   inicioEditarOperador,
   deletarOperador,
   cadastrarOperador,
-  editarOperador
+  editarOperador,
+  navegarTelaPessoas
 } from './state/operadorActions'
 import { FaEdit, FaTrash, FaUserPlus, FaUserEdit } from 'react-icons/fa'
 import './TelaOperadores.scss'
@@ -19,6 +20,9 @@ const TelaOperadores = props => {
 
   return (
     <div className="tela-operadores">
+      <button className="navegar-tela-pessoas" onClick={props.navegarTelaPessoas}>
+        Tela Pessoas
+      </button>
       <div className="form-operadores">
         {props.operador.id ? <p>Editando Operador</p> : <p>Cadastrar Novo Operador</p>}
         <label>
@@ -90,6 +94,7 @@ const mapStateToProps = state => ({
   operador: state.operador.operador
 })
 const mapDispatchToProps = {
+  navegarTelaPessoas,
   editarOperador,
   cadastrarOperador,
   deletarOperador,

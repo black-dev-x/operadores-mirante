@@ -18,6 +18,13 @@ export const detalhesPessoa = pessoa => {
     dispatch(push(`pessoa/${pessoa.id}`))
   }
 }
+
+export const navegarTelaOperadores = _ => {
+  return dispatch => {
+    dispatch(push('operador'))
+  }
+}
+
 export const LISTAR_PESSOAS_SUCESSO = 'LISTAR PESSOAS SUCESSO'
 export const listarPessoasSucesso = pessoas => ({
   type: LISTAR_PESSOAS_SUCESSO,

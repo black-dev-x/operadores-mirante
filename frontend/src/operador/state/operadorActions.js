@@ -1,4 +1,5 @@
 import api from '../../configurations/api'
+import { push } from 'connected-react-router'
 
 export const carregarListaOperadores = () => {
   return dispatch => {
@@ -64,3 +65,9 @@ export const cadastrarOperadorSucesso = operador => ({
   type: CADASTRAR_OPERADOR_SUCESSO,
   payload: operador
 })
+
+export const navegarTelaPessoas = _ => {
+  return dispatch => {
+    dispatch(push('pessoa'))
+  }
+}

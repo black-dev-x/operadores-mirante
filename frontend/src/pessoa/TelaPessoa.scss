@@ -105,3 +105,17 @@
     }
   }
 }
+.painel-admin {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 20px;
+  transition: 0.5s color;
+  transition: 0.5s background-color;
+  font-size: 1.2em;
+  border-radius: 10px;
+  &:hover {
+    background-color: slategray;
+    color: white;
+  }
+}
