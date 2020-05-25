@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { listarPessoas, inicioEditarPessoa, deletarPessoa, detalhesPessoa } from './state/pessoaActions'
 import { FaEdit, FaPhone, FaTrash } from 'react-icons/fa'
+import { dataFormatada } from '../shared/dateFormat'
 const ListaPessoa = props => {
   const listarPessoas = props.listarPessoas
 
@@ -28,7 +29,7 @@ const ListaPessoa = props => {
               <td>{pessoa.nome}</td>
               <td>{pessoa.tipoPessoa}</td>
               <td>{pessoa.documento}</td>
-              <td>{pessoa.dataDeNascimento}</td>
+              <td>{dataFormatada(new Date(pessoa.dataDeNascimento))}</td>
               <td>{pessoa.loginDoOperador}</td>
               <td>
                 <div className="actions">

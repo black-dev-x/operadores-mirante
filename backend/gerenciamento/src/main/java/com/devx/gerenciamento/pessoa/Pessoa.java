@@ -28,7 +28,8 @@ public class Pessoa {
 	@NotNull(message = "O Documento deve ser informado")
 	private String documento;
 
-	@Past
+	@Past(message = "Por favor, volte daqui uns dias quando essa pessoa nascer, para cadastra-la")
+	@NotNull(message = "A Data de nascimento deve ser informada")
 	private Date dataDeNascimento;
 
 	@Pattern(regexp = "[^0-9]*", message = "Não pode conter numeros no nome")

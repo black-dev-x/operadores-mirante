@@ -4,6 +4,7 @@ import { informacoesPessoa, deletarTelefone, adicionarTelefone, atualizarCamposT
 import './DetalhesPessoa.scss'
 import { FaPlusCircle, FaTrash } from 'react-icons/fa'
 import { getUser } from '../configurations/auth'
+import { dataFormatada } from '../shared/dateFormat'
 const DetalhesPessoa = props => {
   const idPessoa = props.match.params.id
   const informacoesPessoa = props.informacoesPessoa
@@ -32,7 +33,7 @@ const DetalhesPessoa = props => {
           </li>
           <li>
             <span>Data de Nascimento:</span>
-            {props.pessoa.dataDeNascimento}
+            {dataFormatada(new Date(props.pessoa.dataDeNascimento))}
           </li>
           <li>
             <span>Nome da Mãe:</span>

@@ -23,7 +23,7 @@ const CadastroPessoa = props => {
       </label>
       <label>
         <p>Data de Nascimento</p>
-        <input type="text" name="dataDeNascimento" value={props.pessoa.dataDeNascimento} onChange={props.alterarCampoPessoa} />
+        <input type="date" name="dataDeNascimento" value={props.pessoa.dataDeNascimento} onChange={props.alterarCampoPessoa} />
       </label>
       <label>
         <p>Nome do Pai</p>
