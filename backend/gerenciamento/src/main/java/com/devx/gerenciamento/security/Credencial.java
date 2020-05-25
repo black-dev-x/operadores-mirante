@@ -1,21 +1,21 @@
 package com.devx.gerenciamento.security;
 
-import java.util.Set;
-
 import javax.security.enterprise.credential.Credential;
+
+import com.devx.gerenciamento.operador.Perfil;
 
 public class Credencial implements Credential {
 
 	private final String principal;
-	private final Set<String> authorities; 
+	private final Perfil permissao; 
 	
-	public Credencial(String principal, Set<String> authorities) {
+	public Credencial(String principal, Perfil permissao) {
 		this.principal = principal;
-		this.authorities = authorities;
+		this.permissao = permissao;
 	}
 
-	public Set<String> getAuthorities() {
-		return authorities;
+	public Perfil getPermissao() {
+		return permissao;
 	}
 	
 	public String getPrincipal() {

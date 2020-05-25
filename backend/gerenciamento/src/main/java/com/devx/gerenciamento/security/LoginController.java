@@ -14,8 +14,8 @@ public class LoginController {
 	@POST
 	public Response login(InformacoesLogin informacoesLogin) {
 		try {
-			String token =  loginService.logar(informacoesLogin); 
-			return Response.ok(token).build();
+			UsuarioLogado usuarioLogado =  loginService.logar(informacoesLogin); 
+			return Response.ok(usuarioLogado).build();
 		} catch(RuntimeException e) {
 			return Response.status(Response.Status.FORBIDDEN).build();
 		}

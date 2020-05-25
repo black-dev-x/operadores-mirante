@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Telefone {
 
@@ -24,6 +26,7 @@ public class Telefone {
 
 	private TipoTelefone tipoTelefone;
 
+	@CreationTimestamp
 	private Date dataCadastro;
 
 	private String loginDoOperador;

@@ -16,12 +16,17 @@ public class LoginService {
 	@EJB
 	private TokenProvider tokenProvider;
 	
-	public String logar(InformacoesLogin informacoesLogin) {
+	public UsuarioLogado logar(InformacoesLogin informacoesLogin) {
 		Operador operador = entityManager.createQuery("SELECT o FROM Operador o where o.login = :login", Operador.class)
 				.setParameter("login", informacoesLogin.getUsername()).getSingleResult();
 		boolean senhaEstaCorreta = operador.getSenha().equals(informacoesLogin.getPassword());
 		if(!senhaEstaCorreta) throw new RuntimeException("Problemas para logar xD, senha errada");
-		return tokenProvider.criarToken(operador);
+		String token = tokenProvider.criarToken(operador);
+		UsuarioLogado usuarioLogado = new UsuarioLogado();
+		usuarioLogado.setJwt(token);
+		usuarioLogado.setPerfil(operador.getPerfil());
+		usuarioLogado.setUsername(operador.getLogin());
+		return usuarioLogado;
 
 	}
 }

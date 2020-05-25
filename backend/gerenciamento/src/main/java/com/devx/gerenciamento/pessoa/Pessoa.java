@@ -1,13 +1,14 @@
 package com.devx.gerenciamento.pessoa;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.Past;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Pessoa {
@@ -20,16 +21,15 @@ public class Pessoa {
 
 	private String documento;
 
+	@Past
 	private Date dataDeNascimento;
 
 	private String nomeDaMae;
 
-	private String dataDeCadastro;
+	@CreationTimestamp
+	private Date dataDeCadastro;
 
 	private String loginDoOperador;
-
-	@OneToMany(mappedBy = "pessoa")
-	private List<Telefone> telefones;
 
 	private TipoPessoa tipoPessoa;
 
@@ -64,7 +64,7 @@ public class Pessoa {
 	public void setDataDeNascimento(Date dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
-
+	
 	public String getNomeDaMae() {
 		return nomeDaMae;
 	}
@@ -73,11 +73,11 @@ public class Pessoa {
 		this.nomeDaMae = nomeDaMae;
 	}
 
-	public String getDataDeCadastro() {
+	public Date getDataDeCadastro() {
 		return dataDeCadastro;
 	}
 
-	public void setDataDeCadastro(String dataDeCadastro) {
+	public void setDataDeCadastro(Date dataDeCadastro) {
 		this.dataDeCadastro = dataDeCadastro;
 	}
 
@@ -95,14 +95,6 @@ public class Pessoa {
 
 	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
-	}
-
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
 	}
 
 }

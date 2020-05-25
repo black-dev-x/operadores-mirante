@@ -21,12 +21,26 @@ public class Startup {
 		Query adminQuery = entityManager.createQuery("SELECT o FROM Operador o WHERE o.perfil = :perfil").setParameter("perfil", Perfil.ADMIN);
 		boolean naoPossuiAdmin = adminQuery.getFirstResult() == 0;
 		if(naoPossuiAdmin) {
-			Operador operador = new Operador();
-			operador.setPerfil(Perfil.ADMIN);
-			operador.setNome("admin");
-			operador.setSenha("admin");
-			operador.setLogin("admin");
-			entityManager.persist(operador); 			
+			Operador admin = new Operador();
+			admin.setPerfil(Perfil.ADMIN);
+			admin.setNome("admin");
+			admin.setSenha("admin");
+			admin.setLogin("admin");
+			entityManager.persist(admin); 	
+			
+			Operador analista = new Operador();
+			analista.setPerfil(Perfil.ANALISTA);
+			analista.setNome("analista");
+			analista.setSenha("analista");
+			analista.setLogin("analista");
+			entityManager.persist(analista); 
+			
+			Operador gerente = new Operador();
+			gerente.setPerfil(Perfil.GERENTE);
+			gerente.setNome("gerente");
+			gerente.setSenha("gerente");
+			gerente.setLogin("gerente");
+			entityManager.persist(gerente); 
 		}
 	}
 }

@@ -30,14 +30,13 @@ public class OperadorController {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Secured
 	public List<Operador> listar() {
-		System.out.println(securityContext.getUserPrincipal().getName());
-		System.out.println("*****************");
 		return operadorService.listar();
 	}
 	
 	@POST	
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured
 	public Operador cadastrar(Operador operador) {
 		return operadorService.cadastrar(operador);
 	}
@@ -45,6 +44,7 @@ public class OperadorController {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured
 	public Operador editar(Operador operador) {
 		return operadorService.editar(operador);
 	}
@@ -53,6 +53,7 @@ public class OperadorController {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured
 	public Operador deletar(@PathParam("id") int id) {
 		return operadorService.deletar(id);
 	}	

@@ -1,0 +1,33 @@
+.tela-pessoa {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #eee;
+
+  .cadastro-pessoa {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+    p {
+      width: 50%;
+    }
+    input,
+    select {
+      width: 50%;
+    }
+
+    label {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}

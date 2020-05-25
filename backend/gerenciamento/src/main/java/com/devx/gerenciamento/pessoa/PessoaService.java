@@ -13,9 +13,6 @@ public class PessoaService {
 	private EntityManager entityManager;
 
 	public Pessoa cadastrar(Pessoa pessoa) {
-		pessoa.getTelefones().forEach(telefone -> {
-			entityManager.persist(telefone);	
-		});
 		entityManager.persist(pessoa);
 		return pessoa;
 	}

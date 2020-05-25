@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 public class Operador {
 
@@ -22,7 +24,8 @@ public class Operador {
 
 	private Perfil perfil;
 
-	private Date dataDeCadastro = new Date();
+	@CreationTimestamp
+	private Date dataDeCadastro;
 
 	public Integer getId() {
 		return id;
