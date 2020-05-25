@@ -50,10 +50,7 @@ export const cadastrarOperador = operador => {
     api
       .post('/operador', operador)
       .then(response => dispatch([cadastrarOperadorSucesso(response.data), limparCamposOperadores()]))
-      .catch(error => {
-        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
-        alert(mensagens)
-      })
+      .catch(error => alert('erro ao cadastrar operador:' + error.message))
   }
 }
 
@@ -62,10 +59,7 @@ export const editarOperador = operador => {
     api
       .put('/operador', operador)
       .then(response => dispatch([editarOperadorSucesso(response.data), limparCamposOperadores()]))
-      .catch(error => {
-        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
-        alert(mensagens)
-      })
+      .catch(error => alert('erro ao editar operador:' + error.message))
   }
 }
 
