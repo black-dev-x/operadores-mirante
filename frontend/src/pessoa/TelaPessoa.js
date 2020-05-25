@@ -1,13 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { getUser } from '../configurations/auth'
 import './TelaPessoa.scss'
 import CadastroPessoa from './CadastroPessoa'
 import ListaPessoa from './ListaPessoa'
 const TelaPessoa = _ => {
+  const usuarioLogado = getUser()
+  const gerenteOuAdmin = usuarioLogado.perfil === 'ADMIN' || usuarioLogado.perfil === 'GERENTE'
   return (
     <div className="tela-pessoa">
-      <CadastroPessoa></CadastroPessoa>
-      <ListaPessoa></ListaPessoa>
+      {gerenteOuAdmin && <CadastroPessoa></CadastroPessoa>}
+      <ListaPessoa gerenteOuAdmin={gerenteOuAdmin}></ListaPessoa>
     </div>
   )
 }

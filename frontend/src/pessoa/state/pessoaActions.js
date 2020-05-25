@@ -55,7 +55,7 @@ export const limparCamposPessoa = _ => ({
 
 export const deletarPessoa = pessoa => {
   return dispatch => {
-    api.delete(`pessoa/${pessoa.id}`).then(_ => dispatch(deletarPessoaSucesso(pessoa)))
+    api.delete(`pessoa/${pessoa.id}`).then(_ => dispatch([deletarPessoaSucesso(pessoa), limparCamposPessoa()]))
   }
 }
 

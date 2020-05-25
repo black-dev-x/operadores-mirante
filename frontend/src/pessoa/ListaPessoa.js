@@ -33,9 +33,13 @@ const ListaPessoa = props => {
               <td>{pessoa.loginDoOperador}</td>
               <td>
                 <div className="actions">
-                  <FaEdit onClick={() => props.inicioEditarPessoa(pessoa)}></FaEdit>
+                  {props.gerenteOuAdmin && (
+                    <>
+                      <FaEdit onClick={() => props.inicioEditarPessoa(pessoa)}></FaEdit>
+                      <FaTrash onClick={() => props.deletarPessoa(pessoa)}></FaTrash>
+                    </>
+                  )}
                   <FaPhone></FaPhone>
-                  <FaTrash onClick={() => props.deletarPessoa(pessoa)}></FaTrash>
                 </div>
               </td>
             </tr>
