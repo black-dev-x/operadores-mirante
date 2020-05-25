@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,15 +20,23 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotNull(message = "O nome deve ser informado")
+	@Size(max=100, message="Tamanho máximo do nome é de 100 caracteres")
+	@Pattern(regexp = "[^0-9]*", message = "Não pode conter numeros no nome")
 	private String nome;
 
+	@NotNull(message = "O Documento deve ser informado")
 	private String documento;
 
 	@Past
 	private Date dataDeNascimento;
 
+	@Pattern(regexp = "[^0-9]*", message = "Não pode conter numeros no nome")
+	@Size(max=100, message="Tamanho máximo do nome da mãe é de 100 caracteres")
 	private String nomeDaMae;
 
+	@Pattern(regexp = "[^0-9]*", message = "Não pode conter numeros no nome")
+	@Size(max=100, message="Tamanho máximo do nome do pai é de 100 caracteres")
 	private String nomeDoPai;
 
 	@CreationTimestamp
@@ -33,6 +44,7 @@ public class Pessoa {
 
 	private String loginDoOperador;
 
+	@NotNull(message = "Por favor, informa o tipo de pessoa, FISICA ou JURIDICA")
 	private TipoPessoa tipoPessoa;
 
 	public Integer getId() {

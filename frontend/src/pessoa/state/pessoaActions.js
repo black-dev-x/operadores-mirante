@@ -9,19 +9,22 @@ export const alterarCampoPessoa = event => ({
 
 export const listarPessoas = _ => {
   return dispatch => {
-    api.get('pessoa').then(response => dispatch(listarPessoasSucesso(response.data)))
+    api
+      .get('/pessoa')
+      .then(response => dispatch(listarPessoasSucesso(response.data)))
+      .catch(_ => alert('Erro ao carregar lista de pessoas'))
   }
 }
 
 export const detalhesPessoa = pessoa => {
   return dispatch => {
-    dispatch(push(`pessoa/${pessoa.id}`))
+    dispatch(push(`/pessoa/${pessoa.id}`))
   }
 }
 
 export const navegarTelaOperadores = _ => {
   return dispatch => {
-    dispatch(push('operador'))
+    dispatch(push('/operador'))
   }
 }
 
@@ -33,7 +36,13 @@ export const listarPessoasSucesso = pessoas => ({
 
 export const cadastrarPessoa = pessoa => {
   return dispatch => {
-    api.post('pessoa', pessoa).then(response => dispatch([cadastrarPessoaSucesso(response.data), limparCamposPessoa()]))
+    api
+      .post('/pessoa', pessoa)
+      .then(response => dispatch([cadastrarPessoaSucesso(response.data), limparCamposPessoa()]))
+      .catch(error => {
+        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
+        alert(mensagens)
+      })
   }
 }
 
@@ -51,7 +60,13 @@ export const inicioEditarPessoa = pessoa => ({
 
 export const editarPessoa = pessoa => {
   return dispatch => {
-    api.put('pessoa', pessoa).then(response => dispatch([editarPessoaSucesso(response.data), limparCamposPessoa()]))
+    api
+      .put('/pessoa', pessoa)
+      .then(response => dispatch([editarPessoaSucesso(response.data), limparCamposPessoa()]))
+      .catch(error => {
+        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
+        alert(mensagens)
+      })
   }
 }
 
@@ -68,7 +83,10 @@ export const limparCamposPessoa = _ => ({
 
 export const deletarPessoa = pessoa => {
   return dispatch => {
-    api.delete(`pessoa/${pessoa.id}`).then(_ => dispatch([deletarPessoaSucesso(pessoa), limparCamposPessoa()]))
+    api
+      .delete(`/pessoa/${pessoa.id}`)
+      .then(_ => dispatch([deletarPessoaSucesso(pessoa), limparCamposPessoa()]))
+      .catch(_ => alert('Erro ao deletar pessoa'))
   }
 }
 
@@ -80,8 +98,14 @@ export const deletarPessoaSucesso = pessoa => ({
 
 export const informacoesPessoa = id => {
   return dispatch => {
-    api.get(`/pessoa/${id}`).then(response => dispatch(informacoesPessoaSucesso(response.data)))
-    api.get(`/pessoa/telefones/${id}`).then(response => dispatch(informacoesTelefoneSucesso(response.data)))
+    api
+      .get(`/pessoa/${id}`)
+      .then(response => dispatch(informacoesPessoaSucesso(response.data)))
+      .catch(_ => alert('Erro ao carregar informações da pessoa'))
+    api
+      .get(`/pessoa/telefones/${id}`)
+      .then(response => dispatch(informacoesTelefoneSucesso(response.data)))
+      .catch(_ => alert('Erro ao carregar telefones da pessoa'))
   }
 }
 
@@ -99,7 +123,10 @@ export const informacoesTelefoneSucesso = telefones => ({
 
 export const deletarTelefone = telefone => {
   return dispatch => {
-    api.delete(`/pessoa/telefones/${telefone.id}`).then(_ => dispatch(deletarTelefoneSucesso(telefone)))
+    api
+      .delete(`/pessoa/telefones/${telefone.id}`)
+      .then(_ => dispatch(deletarTelefoneSucesso(telefone)))
+      .catch(_ => alert('Erro ao deletar telefone da pessoa'))
   }
 }
 
@@ -115,6 +142,10 @@ export const adicionarTelefone = (telefone, pessoa) => {
     api
       .post('/pessoa/telefones', telefone)
       .then(response => dispatch([adicionarTelefoneSucesso(response.data), limparCamposInformacoesPessoa()]))
+      .catch(error => {
+        const mensagens = error.response.data.parameterViolations.reduce((erro1, erro2) => erro1.message + ', ' + erro2.message)
+        alert(mensagens)
+      })
   }
 }
 

@@ -13,6 +13,7 @@ public class OperadorService {
 	private EntityManager entityManager;
 	
 	public Operador cadastrar(Operador operador) {
+		validacaoDePerfil(operador);
 		entityManager.persist(operador);
 		return operador;
 	}
@@ -27,13 +28,20 @@ public class OperadorService {
 		operadorSalvo.setNome(operador.getNome());
 		operadorSalvo.setSenha(operador.getSenha());
 		operadorSalvo.setPerfil(operador.getPerfil());
+		validacaoDePerfil(operador);
 		entityManager.persist(operadorSalvo);
 		return operadorSalvo;
 	}
 
 	public Operador deletar(int id) {
 		Operador operadorSalvo = entityManager.find(Operador.class, id);
+		validacaoDePerfil(operadorSalvo);
 		entityManager.remove(operadorSalvo);
 		return operadorSalvo;
+	}
+	
+	private void validacaoDePerfil(Operador operador) {
+		if(operador.getPerfil() == Perfil.ADMIN)
+			throw new RuntimeException("Não é possível cadastrar, editar ou remover o usuário ADMIN, Solicite essa feature para o pessoal de TI!!!");
 	}
 }

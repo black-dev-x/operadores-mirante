@@ -3,6 +3,7 @@ package com.devx.gerenciamento.operador;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -37,7 +38,7 @@ public class OperadorController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Secured
-	public Operador cadastrar(Operador operador) {
+	public Operador cadastrar(@Valid Operador operador) {
 		return operadorService.cadastrar(operador);
 	}
 	
@@ -45,7 +46,7 @@ public class OperadorController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Secured
-	public Operador editar(Operador operador) {
+	public Operador editar(@Valid Operador operador) {
 		return operadorService.editar(operador);
 	}
 	

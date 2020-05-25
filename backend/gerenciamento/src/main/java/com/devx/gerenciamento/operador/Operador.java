@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -16,12 +19,22 @@ public class Operador {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotNull(message = "O nome deve ser informado")
+	@Size(max=100, message="Tamanho máximo do nome é de 100 caracteres")
+	@Pattern(regexp = "[^0-9]*", message = "Não pode conter numeros no nome")
 	private String nome;
 
+	@NotNull(message = "O login deve ser informado")
+	@Size(max=15, message="O nome deve ter no máximo 15 caracteres")
+	@Pattern(regexp = "[a-zA-Z-_]*", message = "O login deve conter somente letras, - ou _")
 	private String login;
 
+	@NotNull(message = "A senha deve ser informada")
+	@Size(min=6, max=15, message="A senha deve estar entre 6 e 15 caracteres")
+	@Pattern(regexp = "[^ ]*", message="A senha não deve conter espaços em branco")
 	private String senha;
 
+	@NotNull(message = "O perfil deve ser informado (ANALISTA OU GERENTE)")
 	private Perfil perfil;
 
 	@CreationTimestamp

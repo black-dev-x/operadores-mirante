@@ -3,6 +3,7 @@ package com.devx.gerenciamento.pessoa;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -31,7 +32,7 @@ public class PessoaController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Secured(Perfil.GERENTE)
-	public Pessoa cadastrar(Pessoa pessoa) {
+	public Pessoa cadastrar(@Valid Pessoa pessoa) {
 		String loginDoOperador = securityContext.getUserPrincipal().getName();
 		pessoa.setLoginDoOperador(loginDoOperador);
 		return pessoaService.cadastrar(pessoa);
@@ -39,6 +40,7 @@ public class PessoaController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured({Perfil.GERENTE, Perfil.ANALISTA})
 	public List<Pessoa> listar() {
 		return pessoaService.listar();
 	}
@@ -46,18 +48,21 @@ public class PessoaController {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured({Perfil.GERENTE, Perfil.ANALISTA})
 	public Pessoa informacoesPessoa(@PathParam("id") int idPessoa) {
 		return pessoaService.informacoesPessoa(idPessoa);
 	}
 	
 	@GET
 	@Path("telefones/{id}")
+	@Secured({Perfil.GERENTE, Perfil.ANALISTA})
 	public List<Telefone> informacoesTelefone(@PathParam("id") int idPessoa){
 		return pessoaService.informacoesTelefone(idPessoa);
 	}
 	
 	@DELETE
 	@Path("telefones/{id}")
+	@Secured(Perfil.GERENTE)
 	public Telefone deletarTelefone(@PathParam("id") int idTelefone){
 		return pessoaService.deletarTelefone(idTelefone);
 	}
@@ -67,8 +72,9 @@ public class PessoaController {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Secured(Perfil.GERENTE)
-	public Telefone salvarTelefone(Telefone telefone) {
+	public Telefone salvarTelefone(@Valid Telefone telefone) {
 		String loginOperador = securityContext.getUserPrincipal().getName();
+		System.out.println("O operador encontra-se com problemas" + loginOperador);
 		telefone.setLoginDoOperador(loginOperador);
 		return pessoaService.salvarTelefone(telefone);
 	}
@@ -76,6 +82,7 @@ public class PessoaController {
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Secured(Perfil.GERENTE)
 	public Pessoa deletarPessoa(@PathParam("id") int idPessoa) {
 		return pessoaService.deletarPessoa(idPessoa);
 	}
@@ -83,7 +90,8 @@ public class PessoaController {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Pessoa editarPessoa(Pessoa pessoa) {
+	@Secured(Perfil.GERENTE)
+	public Pessoa editarPessoa(@Valid Pessoa pessoa) {
 		return pessoaService.editarPessoa(pessoa);
 	}
 }

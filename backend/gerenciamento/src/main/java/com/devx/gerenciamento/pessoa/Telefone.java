@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,13 +20,20 @@ public class Telefone {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	private int ddd;
+	@NotNull(message = "O DDD deve ser informado")
+	@Size(min=3, max=3, message="O tamanho do DDD é de 3 caracteres")
+	@Pattern(regexp = "[0-9]*", message = "O DDD deve conter apenas números")
+	private String ddd;
 
 	@ManyToOne
 	private Pessoa pessoa;
 
+	@NotNull(message = "O numero de telefone deve ser informado")
+	@Size(min = 8, max = 10, message="O numero de telefone deve estar entre 8 e 10 caracteres")
+	@Pattern(regexp = "[0-9]*", message = "O numero de telefone deve conter apenas números")
 	private String numero;
 
+	@NotNull(message = "O tipo de telefone deve ser informado (CELULAR, FIXO, COMERCIAL)")
 	private TipoTelefone tipoTelefone;
 
 	@CreationTimestamp
@@ -39,11 +49,11 @@ public class Telefone {
 		this.id = id;
 	}
 
-	public int getDdd() {
+	public String getDdd() {
 		return ddd;
 	}
 
-	public void setDdd(int ddd) {
+	public void setDdd(String ddd) {
 		this.ddd = ddd;
 	}
 

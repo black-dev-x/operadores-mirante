@@ -23,6 +23,9 @@ public class PessoaService {
 
 	public Pessoa deletarPessoa(int idPessoa) {
 		Pessoa pessoa = entityManager.find(Pessoa.class, idPessoa);
+		List<Telefone> telefones = entityManager.createQuery("Select t FROM Telefone t JOIN t.pessoa p WHERE p.id = :id", Telefone.class)
+		.setParameter("id", idPessoa).getResultList();
+		telefones.forEach(telefone -> entityManager.remove(telefone));
 		entityManager.remove(pessoa);
 		return pessoa;
 	}

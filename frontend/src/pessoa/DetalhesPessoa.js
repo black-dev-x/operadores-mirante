@@ -53,7 +53,14 @@ const DetalhesPessoa = props => {
           <li>
             {gerenteOuAdmin && (
               <div className="input-telefone">
-                <input placeholder="DDD" className="ddd" value={props.telefone.ddd} name="ddd" onChange={props.atualizarCamposTelefone} />
+                <input
+                  placeholder="DDD"
+                  className="ddd"
+                  value={props.telefone.ddd}
+                  name="ddd"
+                  onChange={props.atualizarCamposTelefone}
+                  maxLength={3}
+                />
                 <input placeholder="Numero" value={props.telefone.numero} name="numero" onChange={props.atualizarCamposTelefone} />
                 <select value={props.telefone.tipoTelefone} name="tipoTelefone" onChange={props.atualizarCamposTelefone}>
                   <option value="CELULAR">Celular</option>

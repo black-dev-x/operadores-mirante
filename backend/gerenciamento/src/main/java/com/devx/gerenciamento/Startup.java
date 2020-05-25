@@ -24,7 +24,7 @@ public class Startup {
 			Operador admin = new Operador();
 			admin.setPerfil(Perfil.ADMIN);
 			admin.setNome("admin");
-			admin.setSenha("admin");
+			admin.setSenha("123456");
 			admin.setLogin("admin");
 			entityManager.persist(admin); 	
 			
